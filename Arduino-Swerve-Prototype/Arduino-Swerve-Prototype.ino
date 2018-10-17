@@ -24,7 +24,7 @@ Servo swerve3;
 Servo swerve4;
 /********************VARIABLES***********************/
 char recdChar;
-int angle=90;
+int angle=90, servoCorrection[]={0,0,0,0};
 uint8_t i=0;
 bool start=0;   //flag variable for starting decapsulation of data
 /******************Function Declarations***************/
@@ -93,12 +93,11 @@ void loop() {
       angle=90;
       break;
     }
-    Serial.println(angle);
   }
-  swerve1.write(angle);
-  swerve2.write(angle);
-  swerve3.write(angle);
-  swerve4.write(angle);
+  swerve1.write(angle+servoCorrection[0]);
+  swerve2.write(angle+servoCorrection[1]);
+  swerve3.write(angle+servoCorrection[2]);
+  swerve4.write(angle+servoCorrection[3]);
 }
 
 /*void getAngle(){
