@@ -24,7 +24,7 @@ Servo swerve3;
 Servo swerve4;
 /********************VARIABLES***********************/
 char recdChar;
-int finalAngle=0, angle1=90, angle2=90;
+int angle1=90;
 uint8_t i=0;
 bool start=0;   //flag variable for starting decapsulation of data
 /******************Function Declarations***************/
