@@ -24,7 +24,7 @@ Servo swerve3;
 Servo swerve4;
 /********************VARIABLES***********************/
 char recdChar;
-int angle1=90;
+int angle=90;
 uint8_t i=0;
 bool start=0;   //flag variable for starting decapsulation of data
 /******************Function Declarations***************/
@@ -51,54 +51,54 @@ void loop() {
     recdChar=Serial3.read();
     switch(recdChar){
       case 'A':
-      angle1=0;
+      angle=0;
       break;
       case 'B':
-      angle1=15;
+      angle=15;
       break;
       case 'C':
-      angle1=30;
+      angle=30;
       break;
       case 'D':
-      angle1=45;
+      angle=45;
       break;
       case 'E':
-      angle1=60;
+      angle=60;
       break;
       case 'F':
-      angle1=75;
+      angle=75;
       break;
       case 'G':
-      angle1=90;
+      angle=90;
       break;
       case 'H':
-      angle1=105;
+      angle=105;
       break;
       case 'I':
-      angle1=120;
+      angle=120;
       break;
       case 'J':
-      angle1=135;
+      angle=135;
       break;
       case 'K':
-      angle1=150;
+      angle=150;
       break;
       case 'L':
-      angle1=165;
+      angle=165;
       break;
       case 'M':
-      angle1=180;
+      angle=180;
       break;
       default:
-      angle1=90;
+      angle=90;
       break;
     }
-    Serial.println(angle1);
+    Serial.println(angle);
   }
-  swerve1.write(angle1);
-  swerve2.write(angle1+5);
-  swerve3.write(angle1+10);
-  swerve4.write(angle1+15);
+  swerve1.write(angle);
+  swerve2.write(angle);
+  swerve3.write(angle);
+  swerve4.write(angle);
 }
 
 /*void getAngle(){
