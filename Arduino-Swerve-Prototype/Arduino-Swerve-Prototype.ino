@@ -15,8 +15,14 @@
 * UNDONE – a reversal or "roll back" of previous code.
 * XXX – warn other programmers of problematic or misguiding code
 **************************************/
+
+
+#include<Servo.h>
+Servo swerve1;
+
 /********************VARIABLES***********************/
 char recdChar, angle[3];
+int finalAngle=0;
 uint8_t i=0;
 bool start=0;   //flag variable for starting decapsulation of data
 /******************Function Declarations***************/
@@ -25,11 +31,15 @@ void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
 Serial3.begin(9600);
+swerve1.attach(9);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   getAngle();
+  finalAngle=angle;
+  Serial.println(finalAngle);
+  swerve1.write(finalAngle);
 }
 
 void getAngle(){
@@ -41,8 +51,7 @@ void getAngle(){
     }
     else if(recdChar==']'){
       start=0;
-      Serial.println(angle);
-      delay(3000);
+      //Serial.println(angle);
     }
     else if(i<=2){
       angle[i]=recdChar;    //store decapsulated value in array
