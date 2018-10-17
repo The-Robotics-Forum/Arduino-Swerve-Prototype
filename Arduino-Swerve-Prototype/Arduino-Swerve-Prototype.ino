@@ -30,7 +30,6 @@ Serial3.begin(9600);
 void loop() {
   // put your main code here, to run repeatedly:
   getAngle();
-  Serial.println(angle);
 }
 
 void getAngle(){
@@ -42,7 +41,8 @@ void getAngle(){
     }
     else if(recdChar==']'){
       start=0;
-      return;
+      Serial.println(angle);
+      delay(3000);
     }
     else if(i<=2){
       angle[i]=recdChar;    //store decapsulated value in array
