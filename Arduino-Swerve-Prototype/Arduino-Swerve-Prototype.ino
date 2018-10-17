@@ -33,10 +33,10 @@ void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
 Serial3.begin(9600);
-swerve1.attach(9);
+swerve1.attach(8);
 swerve2.attach(10);
-swerve1.attach(11);
-swerve2.attach(6);
+swerve3.attach(11);
+swerve4.attach(6);
 
 swerve1.write(90);
 swerve2.write(90);
@@ -96,9 +96,9 @@ void loop() {
     Serial.println(angle1);
   }
   swerve1.write(angle1);
-  swerve2.write(angle1);
-  swerve3.write(angle1);
-  swerve4.write(angle1);
+  swerve2.write(angle1+5);
+  swerve3.write(angle1+10);
+  swerve4.write(angle1+15);
 }
 
 /*void getAngle(){
