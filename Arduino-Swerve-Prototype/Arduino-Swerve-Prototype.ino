@@ -20,9 +20,11 @@
 #include<Servo.h>
 Servo swerve1;
 Servo swerve2;
+Servo swerve3;
+Servo swerve4;
 /********************VARIABLES***********************/
-char recdChar, angle1=90, angle2=90;
-int finalAngle=0;
+char recdChar;
+int finalAngle=0, angle1=90, angle2=90;
 uint8_t i=0;
 bool start=0;   //flag variable for starting decapsulation of data
 /******************Function Declarations***************/
@@ -33,8 +35,13 @@ Serial.begin(9600);
 Serial3.begin(9600);
 swerve1.attach(9);
 swerve2.attach(10);
+swerve1.attach(11);
+swerve2.attach(6);
+
 swerve1.write(90);
 swerve2.write(90);
+swerve3.write(90);
+swerve4.write(90);
 }
 
 void loop() {
@@ -44,52 +51,57 @@ void loop() {
     recdChar=Serial3.read();
     switch(recdChar){
       case 'A':
-      angle=90;
+      angle1=0;
       break;
       case 'B':
-      angle-=75;
+      angle1=15;
       break;
       case 'C':
-      angle-=60;
+      angle1=30;
       break;
       case 'D':
-      angle-=45;
+      angle1=45;
       break;
       case 'E':
-      angle-=30;
+      angle1=60;
       break;
       case 'F':
-      angle-=15;
+      angle1=75;
       break;
       case 'G':
-      angle-=0;
+      angle1=90;
       break;
       case 'H':
-      angle-=90;
+      angle1=105;
       break;
       case 'I':
-      angle-=90;
+      angle1=120;
       break;
       case 'J':
-      angle-=90;
+      angle1=135;
       break;
       case 'K':
-      angle-=90;
+      angle1=150;
       break;
       case 'L':
-      angle-=90;
+      angle1=165;
       break;
       case 'M':
-      angle-=90;
+      angle1=180;
       break;
       default:
-      angle-=90;
+      angle1=90;
       break;
     }
+    Serial.println(angle1);
   }
+  swerve1.write(angle1);
+  swerve2.write(angle1);
+  swerve3.write(angle1);
+  swerve4.write(angle1);
 }
 
-void getAngle(){
+/*void getAngle(){
   while(Serial3.available()){
     recdChar=Serial3.read();    //read all incoming values
     if(recdChar=='['){    //encapsulation start charecter is recd
@@ -106,4 +118,4 @@ void getAngle(){
     }
   }
 }
-
+*/
