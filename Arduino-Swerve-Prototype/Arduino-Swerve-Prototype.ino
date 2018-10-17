@@ -4,6 +4,7 @@
  * //TODO:  1. Include servo.h
  *    2. Attach 2 servos on same pin
  *    3. Control angle using Android App
+ *    4. Decapsulate data that is coming through Bluetooth
  */ 
 
 /*************INDEX******************
@@ -15,7 +16,10 @@
 * XXX – warn other programmers of problematic or misguiding code
 **************************************/
 /********************VARIABLES***********************/
-int recdAngle; 
+char recdChar, angle[3];
+uint8_t i=0;
+bool start=0;   //flag variable for starting decapsulation of data
+ 
 void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
@@ -25,7 +29,18 @@ Serial3.begin(9600);
 void loop() {
   // put your main code here, to run repeatedly:
   if(Serial3.available()){
-    recdAngle=Serial3.read();
-    Serial.println(recdAngle);
+    recdChar=Serial3.read();    //read all incoming values
+    if(recdChar=='['){    //encapsulation start charecter is recd
+      start=1;    //start decapsulation
+      i=0;  //restart counting for array
+    }
+    else if(recdChar==']'){
+      start=0;
+      Serial.println(angle);
+    }
+    else if(i<=2){
+      angle[i]=recdChar;    //store decapsulated value in array
+      i++;
+    }
   }
 }
