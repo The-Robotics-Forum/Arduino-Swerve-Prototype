@@ -16,10 +16,11 @@
 * XXX – warn other programmers of problematic or misguiding code
 **************************************/
 /********************VARIABLES***********************/
-char recdChar, angle=0;
-uint8_t i=2;
+char recdChar, angle[3];
+uint8_t i=0;
 bool start=0;   //flag variable for starting decapsulation of data
- 
+/******************Function Declarations***************/
+void getAngle(); 
 void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
@@ -28,20 +29,25 @@ Serial3.begin(9600);
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if(Serial3.available()){
+  getAngle();
+  Serial.println(angle);
+}
+
+void getAngle(){
+  while(Serial3.available()){
     recdChar=Serial3.read();    //read all incoming values
     if(recdChar=='['){    //encapsulation start charecter is recd
       start=1;    //start decapsulation
-      i=2;  //restart counting for array
-      angle=0;
+      i=0;  //restart counting for array
     }
     else if(recdChar==']'){
       start=0;
-      Serial.println(angle);
+      return;
     }
-    else if(i>=0){
-      angle+=recdChar*(10^i);    //store decapsulated value in array
-      i--;
+    else if(i<=2){
+      angle[i]=recdChar;    //store decapsulated value in array
+      i++;
     }
   }
 }
+
